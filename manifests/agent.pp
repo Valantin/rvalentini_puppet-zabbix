@@ -35,13 +35,12 @@ class zabbix::agent (
   # Check if manage_repo is true.
   if $zabbix_repo {
     include zabbix::repo
-    Package['zabbix-agent'] -> Class['zabbix::repo']
-#    Package['zabbix-agent'] {require => Class['zabbix::repo']}
+    Class['zabbix::repo'] -> Package['zabbix-agent']
   }
 
   # Installing the package
   package { 'zabbix-agent':
-    ensure  => 'ensure',
+    ensure  => 'present',
   }
 
   # Controlling the 'zabbix-agent' service
@@ -50,8 +49,9 @@ class zabbix::agent (
     enable     => true,
     hasstatus  => true,
     hasrestart => true,
- #   require    => Package['zabbix-agent'],
   }
+
+  Service['zabbix-agent'] -> Package['zabbix-agent']
 
   # Configuring the zabbix-agent configuration file
   file { $configfile:
@@ -59,26 +59,22 @@ class zabbix::agent (
     owner   => 'zabbix',
     group   => 'zabbix',
     mode    => '0644',
-#    notify  => Service['zabbix-agent'],
-#    require => Package['zabbix-agent'],
     replace => true,
     content => template('zabbix/zabbix_agentd.conf.erb'),
   }
 
-  File[$configfile] ~> Service['zabbix-agent']
+  Service['zabbix-agent'] ~> File[$configfile]
 
-  # Include dir for specific zabbix-agent checks.
-  file { $include_dir:
-    ensure  => directory,
-    owner   => 'zabbix',
-    group   => 'zabbix',
-    recurse => true,
-#    notify  => Service['zabbix-agent'],
-#    require => File[$configfile],
+  if $include_dir {
+    # Include dir for specific zabbix-agent checks.
+    file { $include_dir:
+      ensure  => directory,
+      owner   => 'zabbix',
+      group   => 'zabbix',
+      recurse => true,
+    }
+  
+    Service['zabbix-agent'] ~> File[$include_dir]
+    Package['zabbix-agent'] -> File[$configfile] -> File[$include_dir]
   }
-  
-  File[$include_dir] ~> Service['zabbix-agent']
-  
-  File[$include_dir] -> File[$configfile] -> Package['zabbix-agent']
-  Service['zabbix-agent'] -> Package['zabbix-agent']
 }

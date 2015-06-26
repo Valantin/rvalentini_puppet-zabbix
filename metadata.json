@@ -1,21 +1,66 @@
 {
   "author": "Roberto Valentini",
   "dependencies": [
-  	{"name":"puppetlabs/postgresql","version_requirement":">= 4.0.0"},
     {"name":"puppetlabs/stdlib","version_requirement":">= 4.1.0"},
     {"name":"puppetlabs/mysql","version_requirement":">= 2.0.0"},
     {"name":"puppetlabs/apache","version_requirement":">= 1.0.0"},
     {"name":"puppetlabs/firewall","version_requirement":">= 1.0.0"},
-    {"name":"puppetlabs/ruby","version_requirement":">= 0.4.0"},
-    {"name":"puppetlabs/pe_gem","version_requirement":">= 0.1.0"},
-    {"name":"puppetlabs/apt","version_requirement":"< 2.0.0"}
+    {"name":"puppetlabs/apt","version_requirement":">= 2.0.0"}
   ],
   "license": "Apache",
   "name": "valantin-zabbix",
-  "operatingsystem_support": [],
-  "project_page": "",
+  "operatingsystem_support": [{
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Scientific",
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "6",
+        "7",
+        "8"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "10.04",
+        "12.04",
+        "14.04"
+      ]
+    }
+  ],
+  "project_page": "https://github.com/Valantin/puppet-zabbix",
   "requirements": [],
-  "source": "",
+  "source": "https://github.com/Valantin/puppet-zabbix",
   "summary": "",
   "tags": [],
   "version": "0.0.1"
