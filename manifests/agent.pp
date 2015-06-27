@@ -1,6 +1,8 @@
 class zabbix::agent (
   $zabbix_version        = $zabbix::params::zabbix_version,
   $zabbix_repo           = $zabbix::params::zabbix_repo,
+  $server_ip             = $zabbix::params::zabbix_server_ip,
+  $serveractive_ip       = $zabbix::params::zabbix_serveractive_ip,
   $configfile            = $zabbix::params::agent_config_file,
   $pidfile               = $zabbix::params::agent_PidFile,
   $logfile               = $zabbix::params::agent_LogFile,
@@ -34,16 +36,16 @@ class zabbix::agent (
 
   # Check if manage_repo is true.
   if $zabbix_repo {
-    include zabbix::repo
+    class { 'zabbix::repo':
+      zabbix_version => $zabbix_version,
+    }
     Class['zabbix::repo'] -> Package['zabbix-agent']
   }
 
-  # Installing the package
   package { 'zabbix-agent':
     ensure  => 'present',
   }
 
-  # Controlling the 'zabbix-agent' service
   service { 'zabbix-agent':
     ensure     => running,
     enable     => true,
@@ -53,7 +55,6 @@ class zabbix::agent (
 
   Service['zabbix-agent'] -> Package['zabbix-agent']
 
-  # Configuring the zabbix-agent configuration file
   file { $configfile:
     ensure  => present,
     owner   => 'zabbix',

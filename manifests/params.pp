@@ -10,16 +10,17 @@ class zabbix::params {
     }
   }
   
-  $zabbix_version     = '2.4'
-  $zabbix_timezone    = 'Europe/Rome'
-  $zabbix_server      = 'localhost'
-  $zabbix_server_ip   = '127.0.0.1'
-  $zabbix_frontend    = 'localhost'
-  $zabbix_frontend_ip = '127.0.0.1'
-  $zabbix_proxy       = 'localhost'
-  $zabbix_proxy_ip    = '127.0.0.1'
-  $zabbix_database    = 'mysql'
-  $zabbix_repo        = false
+  $zabbix_version         = '2.4'
+  $zabbix_server          = 'localhost'
+  $zabbix_server_name     = 'localhost'
+  $zabbix_server_ip       = '127.0.0.1'
+  $zabbix_serveractive_ip = '127.0.0.1'
+  $zabbix_frontend        = 'localhost'
+  $zabbix_frontend_ip     = '127.0.0.1'
+  $zabbix_proxy           = 'localhost'
+  $zabbix_proxy_ip        = '127.0.0.1'
+  $zabbix_database        = 'mysql'
+  $zabbix_repo            = false
 
   $server_service_name            = 'zabbix-server'
   $server_config_file             = '/etc/zabbix/zabbix_server.conf'
@@ -42,7 +43,7 @@ class zabbix::params {
   $server_StartPollers            = '100'
   $server_StartIPMIPollers        = '10'
   $server_StartPollersUnreachable = '2'
-  $server_StartTrapper            = '100'
+  $server_StartTrappers           = '100'
   $server_StartPingers            = '30'
   $server_StartDiscoverers        = '1'
   $server_StartHTTPPollers        = '1'
@@ -113,4 +114,24 @@ class zabbix::params {
   $agent_LoadModulePath          = '${libdir}/modules'
   $agent_Include                 = undef
   $agent_LoadModule              = undef
+  
+  $database_type     = $zabbix_database
+  $database_host     = $server_DBHost
+  $database_name     = $server_DBName
+  $database_schema   = $server_DBSchema
+  $database_user     = $server_DBUser
+  $database_password = $server_DBPassword
+  $database_port     = $server_DBPort
+  
+  $frontend_url        = 'localhost'
+  $frontend_ListenIP   = '127.0.0.1'
+  $frontend_ListenPort = '80'
+  $frontend_Timezone   = 'Europe/Rome'
+
+  $apache_php_max_execution_time            = '300'
+  $apache_php_memory_limit                  = '128M'
+  $apache_php_post_max_size                 = '16M'
+  $apache_php_upload_max_filesize           = '2M'
+  $apache_php_max_input_time                = '300'
+  $apache_php_always_populate_raw_post_data = '-1'
 }
