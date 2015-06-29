@@ -92,7 +92,7 @@ class zabbix::frontend (
     php_value post_max_size 16M
     php_value upload_max_filesize 2M
     php_value max_input_time 300
-    php_value date.timezone Europe/Rome
+    php_value date.timezone ${date_timezone}
 </Directory>
 
 <Directory \"/usr/share/zabbix/conf\">

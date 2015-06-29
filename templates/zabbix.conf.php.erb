@@ -2,12 +2,12 @@
 // Zabbix GUI configuration file
 global $DB;
 
-$DB['TYPE']     = '<%= @db.upcase %>';
-$DB['SERVER']   = '<%= @host %>';
-$DB['PORT']     = '<%= @port %>';
-$DB['DATABASE'] = '<%= @name %>';
-$DB['USER']     = '<%= @user %>';
-$DB['PASSWORD'] = '<%= @password %>';
+$DB['TYPE']     = '<%= @dbtype.upcase %>';
+$DB['SERVER']   = '<%= @dbhost %>';
+$DB['PORT']     = '<%= @dbport %>';
+$DB['DATABASE'] = '<%= @dbname %>';
+$DB['USER']     = '<%= @dbuser %>';
+$DB['PASSWORD'] = '<%= @dbpassword %>';
 
 // SCHEMA is relevant only for IBM_DB2 database
 $DB['SCHEMA'] = <%= @schema ? '@schema' : '' %>;
