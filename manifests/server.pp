@@ -64,10 +64,10 @@ class zabbix::server (
     class { 'zabbix::repo':
       zabbix_version => $zabbix_version,
     }
-    Class['zabbix::repo'] -> Package['zabbix-server-${db}']
+    Class['zabbix::repo'] -> Package["zabbix-server-${db}"]
   }
   
-  package { 'zabbix-server-${db}':
+  package { "zabbix-server-${db}":
     ensure  => 'present',
   }
   
@@ -78,7 +78,7 @@ class zabbix::server (
     hasrestart => true,
   }
 
-  Service['zabbix-server'] -> Package['zabbix-server-${db}']
+  Package["zabbix-server-${db}"] -> Service['zabbix-server']
   
   file { $configfile:
     ensure  => present,
